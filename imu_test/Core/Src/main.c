@@ -394,32 +394,41 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
     
-    // Read all sensor data
+// Read all sensor data
     MPU6050_Read_All();
     
-    // Print accelerometer data
-    sprintf(uart_buffer, "Accel: X=%.2f g, Y=%.2f g, Z=%.2f g\r\n", 
-            MPU6050.Ax, MPU6050.Ay, MPU6050.Az);
+    // --- MANUAL FLOAT PRINTING WORKAROUND --- 
+    // We split the float into two integers: the whole part and the decimal part
+    
+    // 1. Accelerometer
+    sprintf(uart_buffer, "Accel: X=%d.%02d g, Y=%d.%02d g, Z=%d.%02d g\r\n", 
+            (int)MPU6050.Ax, abs((int)((MPU6050.Ax - (int)MPU6050.Ax) * 100)),
+            (int)MPU6050.Ay, abs((int)((MPU6050.Ay - (int)MPU6050.Ay) * 100)),
+            (int)MPU6050.Az, abs((int)((MPU6050.Az - (int)MPU6050.Az) * 100)));
     HAL_UART_Transmit(&huart1, (uint8_t*)uart_buffer, strlen(uart_buffer), HAL_MAX_DELAY);
     
-    // Print gyroscope data
-    sprintf(uart_buffer, "Gyro:  X=%.2f °/s, Y=%.2f °/s, Z=%.2f °/s\r\n", 
-            MPU6050.Gx, MPU6050.Gy, MPU6050.Gz);
+    // 2. Gyroscope
+    sprintf(uart_buffer, "Gyro:  X=%d.%02d, Y=%d.%02d, Z=%d.%02d\r\n", 
+            (int)MPU6050.Gx, abs((int)((MPU6050.Gx - (int)MPU6050.Gx) * 100)),
+            (int)MPU6050.Gy, abs((int)((MPU6050.Gy - (int)MPU6050.Gy) * 100)),
+            (int)MPU6050.Gz, abs((int)((MPU6050.Gz - (int)MPU6050.Gz) * 100)));
     HAL_UART_Transmit(&huart1, (uint8_t*)uart_buffer, strlen(uart_buffer), HAL_MAX_DELAY);
     
-    // Print temperature
-    sprintf(uart_buffer, "Temp:  %.2f °C\r\n", MPU6050.Temperature);
+    // 3. Temperature
+    sprintf(uart_buffer, "Temp:  %d.%02d C\r\n", 
+            (int)MPU6050.Temperature, abs((int)((MPU6050.Temperature - (int)MPU6050.Temperature) * 100)));
     HAL_UART_Transmit(&huart1, (uint8_t*)uart_buffer, strlen(uart_buffer), HAL_MAX_DELAY);
-    
-    // Print calculated angles
-    sprintf(uart_buffer, "Angles: Roll=%.2f°, Pitch=%.2f°\r\n", 
-            MPU6050.Roll, MPU6050.Pitch);
+
+    // 4. Angles
+     sprintf(uart_buffer, "Angles: Roll=%d.%02d, Pitch=%d.%02d\r\n", 
+            (int)MPU6050.Roll, abs((int)((MPU6050.Roll - (int)MPU6050.Roll) * 100)),
+            (int)MPU6050.Pitch, abs((int)((MPU6050.Pitch - (int)MPU6050.Pitch) * 100)));
     HAL_UART_Transmit(&huart1, (uint8_t*)uart_buffer, strlen(uart_buffer), HAL_MAX_DELAY);
     
     sprintf(uart_buffer, "-----------------------------------\r\n");
     HAL_UART_Transmit(&huart1, (uint8_t*)uart_buffer, strlen(uart_buffer), HAL_MAX_DELAY);
     
-    HAL_Delay(500);  // Read every 500ms
+    HAL_Delay(1000);
   }
   /* USER CODE END 3 */
 }
