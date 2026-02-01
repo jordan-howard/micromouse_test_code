@@ -95,7 +95,13 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+    // Turn PA1 ON
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);
+    HAL_Delay(1000);
 
+    // Turn PA1 OFF
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
+    HAL_Delay(1000);                   // 1000 ms = 1 second  
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
