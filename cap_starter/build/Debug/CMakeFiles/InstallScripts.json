@@ -1,0 +1,8 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/ST/IEEE_PROJECTS/micromouse_test_code/cap_starter/build/Debug/cmake_install.cmake",
+		"C:/ST/IEEE_PROJECTS/micromouse_test_code/cap_starter/build/Debug/cmake/stm32cubemx/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
