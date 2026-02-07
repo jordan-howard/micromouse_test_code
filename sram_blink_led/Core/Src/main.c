@@ -18,7 +18,6 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "core_cm3.h"   // for SCB
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -64,11 +63,11 @@ static void MX_GPIO_Init(void);
   */
 int main(void)
 {
-
+  SCB->VTOR = 0x20000000;
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
-  SCB->VTOR = 0x20000000;   // 0x20000000 on F103
+
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */

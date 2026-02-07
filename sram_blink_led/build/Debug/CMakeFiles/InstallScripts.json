@@ -1,0 +1,8 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/ST/IEEE_PROJECTS/micromouse_test_code/sram_blink_led/build/Debug/cmake_install.cmake",
+		"C:/ST/IEEE_PROJECTS/micromouse_test_code/sram_blink_led/build/Debug/cmake/stm32cubemx/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
