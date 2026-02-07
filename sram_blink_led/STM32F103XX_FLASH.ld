@@ -98,6 +98,9 @@ SECTIONS
     _edata = .;
   } >RAM
 
+  /* For startup code compatibility */
+  PROVIDE(_sidata = _sdata);
+
   /* BSS in RAM */
   .bss (NOLOAD) :
   {
